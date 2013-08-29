@@ -12,6 +12,8 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
+"set rtp+=~/.vim/bunlde/powerline/bindings/vim
+
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -19,6 +21,10 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "" BUNDLES ------------------------
+" Making with the useful and pretty
+Bundle 'https://github.com/Lokaltog/powerline.git'
+"Bundle 'dotfiles'
+
 " Dash App for Vim
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
@@ -28,7 +34,7 @@ Bundle "tComment"
 
 " Programming
 Bundle "jQuery"
-Bundle "Emmet"
+Bundle "https://github.com/mattn/emmet-vim.git"
 Bundle "node"
 
 " Syntax Highlighting
@@ -87,7 +93,8 @@ set shortmess=aOtI
 set report=0
 set scrolloff=5
 
-set guifont=Source\ Code\ Pro:h16
+"set guifont=Source\ Code\ Pro:h16
+set guifont=Source\ Code\ Pro\ for\ Powerline:h16
 
 " Regular Expression Fun
 
@@ -161,6 +168,8 @@ set splitbelow
 set splitright
 set vb t_vb=
 set showcmd
+set laststatus=2
+set noshowmode
 
 " FuzzyFinder config
 let g:fuf_modesDisable = []
@@ -288,3 +297,10 @@ endfunction
 " Map the function to tab
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
+
+"python from powerline.bindings.vim import source_plugin; source_plugin()
+python import powerline.bindings.vim
+"source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
+source /Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim
+
+
