@@ -23,6 +23,8 @@ Bundle 'gmarik/vundle'
 "" BUNDLES ------------------------
 " Making with the useful and pretty
 Bundle 'https://github.com/Lokaltog/powerline.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 "Bundle 'dotfiles'
 
 " Dash App for Vim
@@ -106,7 +108,9 @@ set undofile
 set undodir=~/.vim/undo
 
 " Theme
-colorscheme oceandeep
+" colorscheme oceandeep
+set background=dark
+colorscheme solarized
 
 " Searching / Machines
 set showmatch                           " show matching brackets
