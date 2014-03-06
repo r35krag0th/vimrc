@@ -309,7 +309,14 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 
-" This needs to be conditional
-python import powerline.bindings.vim
-source /Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim
+"
+" POWERLINE
+"
 
+" Conditionally include Powerline for Vim if the files actually exist.
+let g:powerline_python_vim = '/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim'
+
+if filereadable(powerline_python_vim)
+    python import powerline.bindings.vim
+    exec ":source " . g:powerline_python_vim
+endif
