@@ -54,7 +54,8 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-rails.git'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
-
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle 'https://github.com/kien/ctrlp.vim.git'
 "" END BUNDLES -------------------
 
 " Filetype-based indenting logic enabled; with smartindent
@@ -196,6 +197,7 @@ if has("autocmd")
         au!
         au BufEnter * :syntax sync fromstart  " ensure every file does syntax highlighting (full)
         au BufWritePre * mark `|:%s/\s\+$//e|normal ``      " kill trailing whitespace at the end of lines before writing.
+        autocmd vimenter * if !argc() | NERDTree | endif
     augroup END
 
     augroup makefile
@@ -256,6 +258,11 @@ cabbrev peerl perl
 " like :wq except write and suspend
 ""command Wst w <bar> st
 ""cabbrev wst Wst
+
+" NERDTree
+map <S-t> :NERDTreeToggle<CR>
+let g:ctrlp_map = '<c-t>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " this puts our search term in the middle of the screen
 nmap n nmzz.`z
