@@ -97,7 +97,7 @@ set report=0
 set scrolloff=5
 
 "set guifont=Source\ Code\ Pro:h16
-set guifont=Source\ Code\ Pro\ for\ Powerline:h16
+set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 
 " Regular Expression Fun
 
@@ -292,7 +292,7 @@ vnoremap ? /\v
 
 nnoremap <leader><space> :noh!<cr>
 
-" Make the tab kay dual purpose.
+" Make the tab key dual purpose.
 function! InsertTabWrapper()
     " Where is the cursor on the current line?
     let col = col(".") - 1
@@ -309,9 +309,7 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 
-"python from powerline.bindings.vim import source_plugin; source_plugin()
+" This needs to be conditional
 python import powerline.bindings.vim
-"source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/source_plugin.vim
 source /Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim
-
 
