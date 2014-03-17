@@ -197,6 +197,7 @@ if has("autocmd")
         au!
         au BufEnter * :syntax sync fromstart  " ensure every file does syntax highlighting (full)
         au BufWritePre * mark `|:%s/\s\+$//e|normal ``      " kill trailing whitespace at the end of lines before writing.
+        au BufReadPre,FileReadPre *.pp set ft=puppet
         autocmd vimenter * if !argc() | NERDTree | endif
     augroup END
 
