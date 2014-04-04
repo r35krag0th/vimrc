@@ -28,8 +28,8 @@ Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 "Bundle 'dotfiles'
 
 " Dash App for Vim
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
+" Bundle 'rizzatti/funcoo.vim'
+" Bundle 'rizzatti/dash.vim'
 
 " tComment
 Bundle "tComment"
