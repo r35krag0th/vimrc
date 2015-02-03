@@ -105,8 +105,11 @@ set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 " set gdefault
 
 " Lots of undo history!
-set undofile
-set undodir=~/.vim/undo
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.vim/undo
+endif
+
 
 " Theme
 " colorscheme oceandeep
@@ -123,7 +126,11 @@ set incsearch                           " BUT do highlight as you type you searc
 " Line numbers in the gutter
 set number
 set numberwidth=1
-set norelativenumber
+if exists("&norelativenumber")
+    " relativenumber was introduced in Vim 7.3 - this provides compatibility
+    " for older versions of Vim
+    setlocal norelativenumber
+endif
 set ruler
 
 " BOOP
