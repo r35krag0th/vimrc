@@ -11,7 +11,7 @@ syntax on
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle/
 "set rtp+=~/.vim/bunlde/powerline/bindings/vim
 
 call vundle#rc()
