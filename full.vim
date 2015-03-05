@@ -42,6 +42,9 @@ Bundle "node"
 " Syntax Highlighting
 Bundle "Markdown"
 
+" PHPdocumentor
+Bundle 'tobyS/pdv'
+
 " Git
 Bundle "vim-github-dashboard"
 Bundle "gitignore"
@@ -198,6 +201,10 @@ nnoremap <silent> <LocalLeader>8  :FufBookmark<CR>
 nnoremap <silent> <LocalLeader>*  :FuzzyFinderAddBookmark<CR><CR>
 nnoremap <silent> <LocalLeader>9  :FufTaggedFile<CR>
 
+" PHPdocumentor Setup
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+
 " AutoCmds
 if has("autocmd")
     augroup Standard
@@ -242,6 +249,15 @@ if has("autocmd")
     augroup vimrc
         au!
         au BufEnter .vimrc set fdm=indent
+    augroup END
+    augroup extra_extensions
+        au!
+        au BufEnter *.pp set ft=puppet
+        au BufEnter named.conf.local set ft=named
+        au BufEnter named.conf.options set ft=named
+        au BufEnter named.conf set ft=named
+        au BufEnter *.zone set ft=bindzone
+        au BufEnter /etc/icinga2/conf.d/* set ft=icinga
     augroup END
 endif
 
