@@ -11,7 +11,7 @@ syntax on
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle/
 "set rtp+=~/.vim/bunlde/powerline/bindings/vim
 
 call vundle#rc()
@@ -41,6 +41,9 @@ Bundle "node"
 
 " Syntax Highlighting
 Bundle "Markdown"
+
+" PHPdocumentor
+Bundle 'tobyS/pdv'
 
 " Git
 Bundle "vim-github-dashboard"
@@ -198,6 +201,10 @@ nnoremap <silent> <LocalLeader>8  :FufBookmark<CR>
 nnoremap <silent> <LocalLeader>*  :FuzzyFinderAddBookmark<CR><CR>
 nnoremap <silent> <LocalLeader>9  :FufTaggedFile<CR>
 
+" PHPdocumentor Setup
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+
 " AutoCmds
 if has("autocmd")
     augroup Standard
@@ -242,6 +249,15 @@ if has("autocmd")
     augroup vimrc
         au!
         au BufEnter .vimrc set fdm=indent
+    augroup END
+    augroup extra_extensions
+        au!
+        au BufEnter *.pp set ft=puppet
+        au BufEnter named.conf.local set ft=named
+        au BufEnter named.conf.options set ft=named
+        au BufEnter named.conf set ft=named
+        au BufEnter *.zone set ft=bindzone
+        au BufEnter /etc/icinga2/conf.d/* set ft=icinga
     augroup END
 endif
 
@@ -316,6 +332,26 @@ endfunction
 " Map the function to tab
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
+
+" Toggle between numbers and relative numbers
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+if v:version < 704
+    nnoremap <silent> <leader>n :call NumberToggle()<cr>
+else
+    set relativenumber
+    set number
+endif
+
+" toggle paste/nopaste modes
+nnoremap <silent> <Leader>p :set paste! paste?<CR>
+
 
 "
 " POWERLINE
