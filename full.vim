@@ -333,6 +333,26 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 
+" Toggle between numbers and relative numbers
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+if v:version < 704
+    nnoremap <silent> <leader>n :call NumberToggle()<cr>
+else
+    set relativenumber
+    set number
+endif
+
+" toggle paste/nopaste modes
+nnoremap <silent> <Leader>p :set paste! paste?<CR>
+
+
 "
 " POWERLINE
 "
