@@ -38,6 +38,7 @@ Bundle "tComment"
 Bundle "jQuery"
 Bundle "https://github.com/mattn/emmet-vim.git"
 Bundle "node"
+Plugin 'kchmck/vim-coffee-script'
 
 " Syntax Highlighting
 Bundle "Markdown"
