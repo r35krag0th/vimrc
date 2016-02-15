@@ -25,6 +25,8 @@ Bundle 'gmarik/vundle'
 Bundle 'https://github.com/Lokaltog/powerline.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+Bundle 'git://github.com/sickill/vim-monokai.git'
+Plugin 'ekalinin/Dockerfile.vim'
 "Bundle 'dotfiles'
 
 " Dash App for Vim
