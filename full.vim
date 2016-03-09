@@ -11,14 +11,16 @@ syntax on
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle/
-"set rtp+=~/.vim/bunlde/powerline/bindings/vim
+" Vim Bundle Awesomeness
+" ============================
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 "" BUNDLES ------------------------
 " Making with the useful and pretty
@@ -62,6 +64,10 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
+
+" You have to call vundle#end() BEFORE you set filetype to on
+call vundle#end()            " required
+
 "" END BUNDLES -------------------
 
 " Filetype-based indenting logic enabled; with smartindent
