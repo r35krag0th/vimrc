@@ -15,6 +15,7 @@ filetype off
 " ============================
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/powerline/bindings/vim
 
 call vundle#begin()
 
@@ -22,48 +23,49 @@ call vundle#begin()
 " required!
 Plugin 'VundleVim/Vundle.vim'
 
-"" BUNDLES ------------------------
-" Making with the useful and pretty
-Bundle 'https://github.com/Lokaltog/powerline.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
-Bundle 'git://github.com/altercation/vim-colors-solarized.git'
-Bundle 'git://github.com/sickill/vim-monokai.git'
-Plugin 'ekalinin/Dockerfile.vim'
-"Bundle 'dotfiles'
+" *** General ***
+Plugin 'scrooloose/nerdtree'                         " Awesome tree explorer
+Plugin 'kien/ctrlp.vim'                              " Fuzzy file, buffer, mru, tag, etc finder
 
-" Dash App for Vim
-" Bundle 'rizzatti/funcoo.vim'
-" Bundle 'rizzatti/dash.vim'
+" *** General Programming ***
+Plugin 'scrooloose/syntastic'                        " Syntax Checking / Linting / Flake8
+Plugin 'tComment'                                    " Quick commenting via g -> c
+Plugin 'mattn/emmet-vim'
+Plugin 'tpope/vim-surround'
 
-" tComment
-Bundle "tComment"
+" *** Visual ***
+Plugin 'Lokaltog/powerline'
 
-" Programming
-Bundle "jQuery"
-Bundle "https://github.com/mattn/emmet-vim.git"
-Bundle "node"
+" *** Completion ***
+Plugin 'davidhalter/jedi-vim'
+
+" *** Language ***
+Plugin 'node'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'Markdown'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'jQuery'
 
-" Syntax Highlighting
-Bundle "Markdown"
+" *** Themes ***
+Plugin 'vim-colors-solarized'
+Plugin 'sickill/vim-monokai'
 
+" *** Integrations ***
 " PHPdocumentor
-Bundle 'tobyS/pdv'
+Plugin 'tobyS/pdv'
 
-" Git
-Bundle "vim-github-dashboard"
-Bundle "gitignore"
+" >>> Git / Github
+Plugin 'vim-github-dashboard'
+Plugin 'tpope/vim-fugitive'
+Plugin 'gitignore'
 
 " Stuff
-Bundle "Crunch"
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle 'https://github.com/kien/ctrlp.vim.git'
+Plugin 'Crunch'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'tpope/vim-rails.git'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 
 " You have to call vundle#end() BEFORE you set filetype to on
 call vundle#end()            " required
@@ -126,7 +128,8 @@ endif
 " Theme
 " colorscheme oceandeep
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+colorscheme monokai
 
 " Searching / Machines
 set showmatch                           " show matching brackets
@@ -367,9 +370,9 @@ nnoremap <silent> <Leader>p :set paste! paste?<CR>
 "
 
 " Conditionally include Powerline for Vim if the files actually exist.
-let g:powerline_python_vim = '/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim'
+" let g:powerline_python_vim = '/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim'
 
-if filereadable(powerline_python_vim)
-    python import powerline.bindings.vim
-    exec ":source " . g:powerline_python_vim
-endif
+" if filereadable(powerline_python_vim)
+"     python import powerline.bindings.vim
+"     exec ":source " . g:powerline_python_vim
+" endif
