@@ -5,8 +5,11 @@
 
 let mapleader=','
 let maplocalleader='\\'
+set directory=$HOME/.vim/swap//
+set backupdir=$HOME/.vim/backups//
 
 " Make syntax highlighting work
+let python_highlight_all=1
 syntax on
 set nocompatible
 filetype off
@@ -22,11 +25,17 @@ Bundle 'gmarik/vundle'
 
 "" BUNDLES ------------------------
 " Making with the useful and pretty
-Bundle 'https://github.com/Lokaltog/powerline.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
+" Bundle 'https://github.com/Lokaltog/powerline.git'
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 Bundle 'git://github.com/sickill/vim-monokai.git'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'LogViewer'
+
+
+" Better folding
+Plugin 'tmhedberg/SimpylFold'
 "Bundle 'dotfiles'
 
 " Dash App for Vim
@@ -41,6 +50,12 @@ Bundle "jQuery"
 Bundle "https://github.com/mattn/emmet-vim.git"
 Bundle "node"
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+
+
+" Python Amazingness
+Bundle "https://github.com/davidhalter/jedi-vim.git"
+Plugin 'vim-scripts/indentpython.vim'
 
 " Syntax Highlighting
 Bundle "Markdown"
@@ -61,8 +76,11 @@ Bundle 'tpope/vim-rails.git'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle 'https://github.com/kien/ctrlp.vim.git'
 "" END BUNDLES -------------------
+
+" 256-Color Support
+set t_Co=256
+highlight BadWhitespace ctermbg=red guibg=darkred
 
 " Filetype-based indenting logic enabled; with smartindent
 filetype on
@@ -120,7 +138,8 @@ endif
 " Theme
 " colorscheme oceandeep
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+colorscheme monokai
 
 " Searching / Machines
 set showmatch                           " show matching brackets
@@ -159,7 +178,7 @@ set cinwords=if,else,while,do,for,switch,case
 set tabstop=4                           " tab spacing (settings below are just to unify it)
 set softtabstop=4                       " unify
 set shiftwidth=4                        " unify
-set expandtab                           " [05142007: Changed to Pavlov Standards]
+set expandtab                           " tabs preferred over spaces
 set smarttab
 set wrap                              " do not wrap lines
 set linebreak
@@ -189,6 +208,9 @@ set showcmd
 set laststatus=2
 set noshowmode
 
+" Default Encoding
+set encoding=utf-8
+
 " FuzzyFinder config
 let g:fuf_modesDisable = []
 nnoremap <silent> <LocalLeader>h :FufHelp<CR>
@@ -208,16 +230,97 @@ nnoremap <silent> <LocalLeader>9  :FufTaggedFile<CR>
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
+" Python Jedi for Vim
+" (?) Automatically Init with Vim? (default=1)
+let g:jedi#auto_initialization = 1
+
+" (?) Automatically init Vim config? (default=1)
+let g:jedi#auto_vim_configuration = 1
+
+" (?) Make Jedi-Vim use tabs when going to defs? (default=1)
+let g:jedi#use_tabs_not_buffers = 1
+
+" (?) If you like to use splits... (left, right, top, bottom, winwidth)
+" let g:jedi#use_splits_not_buffers = "left"
+
+" (?) Jedi automatically starts completion if you type something. (default=1)
+let g:jedi#popup_on_dot = 1
+
+" (?) Auto-select the first thing in the menu? (default=1)
+let g:jedi#popup_select_first = 1
+
+" (?) Show func signature when in insert mode (in real-time)
+"   > 1 = Pop Up in Buffer (default)
+"   > 2 = In Vim CmdLine
+let g:jedi#show_call_signatures = 1
+
+" Jedi Key Bindings
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+
+" SimpylFold
+" ===================================
+" Show docstrings for folded code?
+let g:SimpylFold_docstring_preview=1
+
+
+" Syntastic (Syntax Checking for Vim)
+" ====================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_flake8_args='--select=E901,E902,F821,F822,F823,F831'
+
 " AutoCmds
+" ==========================
+"
+" Short-Hand Options
+" --------------------------
+"  ts = tabstop
+"  tw = textwidth
+"  sw = shiftwidth
+"  fo = formatoptions
+"  et = expandtab
+" sta = stowtabline
+" sts = softtabstop
+
 if has("autocmd")
     augroup Standard
         au!
         au BufEnter * :syntax sync fromstart  " ensure every file does syntax highlighting (full)
-        au BufWritePre * mark `|:%s/\s\+$//e|normal ``      " kill trailing whitespace at the end of lines before writing.
+        " au BufWritePre * :mark `|:%s/\s\+$//e|normal ``      " kill trailing whitespace at the end of lines before writing.
+        au BufWritePre * :%s/\s\+$//e
         au BufReadPre,FileReadPre *.pp set ft=puppet
         autocmd vimenter * if !argc() | NERDTree | endif
     augroup END
-
+    augroup Python
+        au!
+        " au FileType python :set ai sw=4 ts=4 sta et fo=croql fdm=indent foldlevel=99
+        au BufRead,BufNewFile *.py,*.pyw,*.c,*.h :match BadWhitespace /\s\+$/
+        au BufRead,BufNewFile *.py,*.pyw,*.c,*.h :match BadWhitespace /\t/
+        au BufNewFile,BufRead *.py :set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+        " au BufWritePre *.py :retab
+    augroup END
+    augroup FullStack
+        au BufNewFile,BufRead *.js, *.html, *.css
+            \ set tabstop=2
+            \ set softtabstop=2
+            \ set shiftwidth=2
+    augroup END
+    augroup JSON
+        au!
+        au BufEnter *.json :set sw=2 ts=2 sts=2 sta et fo=croql
+    augroup END
     augroup makefile
         au!
         au BufNewFile,BufRead Makefile :set fdm=indent
@@ -264,8 +367,16 @@ if has("autocmd")
     augroup END
 endif
 
-" Abbrs
+" Split Window Management
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" Abbrs
 iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
@@ -355,13 +466,23 @@ endif
 " toggle paste/nopaste modes
 nnoremap <silent> <Leader>p :set paste! paste?<CR>
 
+" Special Python Stuff
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 "
 " POWERLINE
 "
 
 " Conditionally include Powerline for Vim if the files actually exist.
-let g:powerline_python_vim = '/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim'
+" let g:powerline_python_vim = '/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim'
+let g:powerline_python_vim = '/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim'
 
 if filereadable(powerline_python_vim)
     python import powerline.bindings.vim
