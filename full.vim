@@ -32,7 +32,7 @@ Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 Bundle 'git://github.com/sickill/vim-monokai.git'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'LogViewer'
-
+Plugin 'editorconfig/editorconfig-vim'
 
 " Better folding
 Plugin 'tmhedberg/SimpylFold'
