@@ -4,7 +4,7 @@
 "  you can space delimit your settings also
 
 let mapleader=','
-let maplocalleader='\\'
+let maplocalleader='['
 set directory=$HOME/.vim/swap//
 set backupdir=$HOME/.vim/backups//
 
@@ -271,15 +271,15 @@ let g:SimpylFold_docstring_preview=1
 
 " Syntastic (Syntax Checking for Vim)
 " ====================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_flake8_args='--select=E901,E902,F821,F822,F823,F831'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_python_flake8_args='--select=E901,E902,F821,F822,F823,F831'
 
 " AutoCmds
 " ==========================
