@@ -33,6 +33,7 @@ Bundle 'git://github.com/sickill/vim-monokai.git'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'LogViewer'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'https://github.com/keith/travis.vim'
 
 " Better folding
 Plugin 'tmhedberg/SimpylFold'
