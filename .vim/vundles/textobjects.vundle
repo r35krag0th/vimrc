@@ -1,4 +1,4 @@
-" vim: ft=sh
+" vim: ft=vim
 
 " These bundles introduce new textobjects into vim,
 " For example the Ruby one introduces the 'r' text object
@@ -15,3 +15,4 @@ Bundle "nathanaelkane/vim-indent-guides"
 Bundle "nelstrom/vim-textobj-rubyblock"
 Bundle "thinca/vim-textobj-function-javascript"
 Bundle "vim-scripts/argtextobj.vim"
+echo "(~/.vim/vundles/textobjects.vundle) Loaded..."

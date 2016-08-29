@@ -1,4 +1,4 @@
-" vim: ft=sh
+" vim: ft=vim
 
 Bundle "ecomba/vim-ruby-refactoring"
 Bundle "tpope/vim-rails.git"
@@ -10,3 +10,4 @@ Bundle "skwp/vim-iterm-rspec"
 Bundle "skwp/vim-spec-finder"
 Bundle "ck3g/vim-change-hash-syntax"
 Bundle "tpope/vim-bundler"
+echo "(~/.vim/vundles/ruby.vundle) Loaded..."

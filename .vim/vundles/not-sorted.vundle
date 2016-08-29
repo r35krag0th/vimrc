@@ -1,5 +1,7 @@
 " vim: ft=vim
 
+echom "Loading Unsorted"
+
 "" BUNDLES ------------------------
 " Making with the useful and pretty
 " Bundle 'https://github.com/Lokaltog/powerline.git'
@@ -16,9 +18,6 @@ Plugin 'vim-airline/vim-airline-themes'
 " LogViewer - A nifty log viewer for vim
 " ==> Git: https://github.com/vim-scripts/LogViewer
 Plugin 'LogViewer'
-
-" EditorConfig - .editorconfig support
-Plugin 'editorconfig/editorconfig-vim'
 
 " Travis - TravisCI Inegrations
 Plugin 'keith/travis.vim'
@@ -74,3 +73,5 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'scrooloose/nerdtree'
 Bundle 'saltstack/salt-vim'
+
+echo "(~/.vim/vundles/not-sorted.vundle) Loaded..."

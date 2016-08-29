@@ -1,4 +1,4 @@
-" vim: ft=sh
+" vim: ft=vim
 
 Bundle 'sheerun/vim-polyglot'
 Bundle 'garbas/vim-snipmate.git'
@@ -8,3 +8,4 @@ Bundle 'scrooloose/syntastic.git'
 Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'skwp/vim-html-escape'
 Bundle 'mxw/vim-jsx'
+echo "(~/.vim/vundles/languages.vundle) Loaded..."

@@ -1,6 +1,7 @@
-" vim: ft=sh
+" vim: ft=vim
 
 Bundle "gregsexton/gitv"
 Bundle "mattn/gist-vim"
 Bundle "tpope/vim-fugitive"
 Bundle "tpope/vim-git"
+echo "(~/.vim/vundles/git.vundle) Loaded..."

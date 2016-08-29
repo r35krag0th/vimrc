@@ -1,4 +1,4 @@
-" vim: ft=sh
+" vim: ft=vim
 
 Bundle "AndrewRadev/splitjoin.vim"
 Bundle "Raimondi/delimitMate"
@@ -31,3 +31,4 @@ Bundle "vim-scripts/sudo.vim"
 Bundle "goldfeld/ctrlr.vim"
 Bundle "editorconfig/editorconfig-vim"
 
+echo "(~/.vim/vundles/vim-improvements.vundle) Loaded..."

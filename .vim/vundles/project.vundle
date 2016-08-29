@@ -1,7 +1,8 @@
-" vim: ft=sh
+" vim: ft=vim
 
 Bundle "jistr/vim-nerdtree-tabs.git"
 Bundle "scrooloose/nerdtree.git"
 Bundle "ctrlpvim/ctrlp.vim"
 Bundle "xolox/vim-misc"
 Bundle "xolox/vim-session"
+echo "(~/.vim/vundles/project.vundle) Loaded..."
