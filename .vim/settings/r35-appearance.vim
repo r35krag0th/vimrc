@@ -29,3 +29,9 @@ endif
 
 colorscheme monokai
 set background=dark
+
+" Vim Airline
+let g:airline#extensions#tabline#enabled = 1
+
+" Use the Powerline Symbols
+let g:airline_powerline_fonts = 1

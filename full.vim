@@ -7,8 +7,16 @@ function! WhichPython()
     return system("/bin/which python")
 endfunction
 
-" (NeoVim) Figure out which python to use via Env
-let g:python_host_prog=WhichPython()
+" Set the RunTime Path for Vim
+if has('nvim')
+    " (NeoVim) Figure out which python to use via Env
+    let g:python_host_prog=WhichPython()
+
+    " (NeoVim) Set RTP accordingly
+    set rtp+=~/.config/nvim/.vim
+endif
+set rtp+=~/.vim/bundle/Vundle.vim
+
 
 " ================ General Config ====================
 set number                      "    (nu) Enable Line numbers
@@ -376,14 +384,16 @@ endfunction
 
 
 " Special Python Stuff
+if !has('nvim')
 py << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
 
 " ================ Custom Settings ========================
 source ~/.vim/settings.vim

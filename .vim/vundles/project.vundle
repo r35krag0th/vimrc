@@ -1,8 +1,9 @@
 " vim: ft=vim
 
-Bundle "jistr/vim-nerdtree-tabs.git"
-Bundle "scrooloose/nerdtree.git"
-Bundle "ctrlpvim/ctrlp.vim"
-Bundle "xolox/vim-misc"
-Bundle "xolox/vim-session"
-echo "(~/.vim/vundles/project.vundle) Loaded..."
+Plugin 'jistr/vim-nerdtree-tabs.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+
+" echo "(~/.vim/vundles/project.vundle) Loaded..."

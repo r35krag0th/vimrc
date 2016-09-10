@@ -1,6 +1,6 @@
 " vim: ft=vim
 
-echom "Loading Unsorted"
+" echom "Loading Unsorted"
 
 "" BUNDLES ------------------------
 " Making with the useful and pretty
@@ -10,10 +10,6 @@ echom "Loading Unsorted"
 
 " Tagbar - Class Outline Viewer
 Plugin 'majutsushi/tagbar'
-
-" Airline - Powerline-like plugin.
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 
 " LogViewer - A nifty log viewer for vim
 " ==> Git: https://github.com/vim-scripts/LogViewer
@@ -27,7 +23,7 @@ Plugin 'tmhedberg/SimpylFold'
 "Bundle 'dotfiles'
 
 " (Theme) Solarized
-Bundle 'altercation/vim-colors-solarized'
+" Bundle 'altercation/vim-colors-solarized'
 
 " (Theme) Monokai
 Bundle 'sickill/vim-monokai'
@@ -39,39 +35,39 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'pearofducks/ansible-vim'
 
 " tComment
-Bundle "tComment"
+Plugin 'tComment'
 
 " Programming
-Bundle "jQuery"
-Bundle "mattn/emmet-vim"
-Bundle "node"
+Plugin 'jQuery'
+Plugin 'mattn/emmet-vim'
+Plugin 'node'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
 
 
 " Python Amazingness
-Bundle "davidhalter/jedi-vim"
+Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-scripts/indentpython.vim'
 
 " Syntax Highlighting
-Bundle "Markdown"
+Plugin 'Markdown'
 
 " PHPdocumentor
 Bundle 'tobyS/pdv'
 
 " Git
-Bundle "vim-github-dashboard"
-Bundle "gitignore"
+Plugin 'vim-github-dashboard'
+Plugin 'gitignore'
 
 " Stuff
-Bundle "Crunch"
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'Crunch'
+" Bundle 'tpope/vim-fugitive'
+" Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails'
+" Bundle 'tpope/vim-rails'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
-Bundle 'scrooloose/nerdtree'
+" Bundle 'scrooloose/nerdtree'
 Bundle 'saltstack/salt-vim'
 
-echo "(~/.vim/vundles/not-sorted.vundle) Loaded..."
+" echo "(~/.vim/vundles/not-sorted.vundle) Loaded..."
