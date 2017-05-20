@@ -1,194 +1,194 @@
 " Bob Saska .vimrc redux
-" Nobody like junky compat mode ;)
+" set XXX      <-- global
+" setlocal XXX <-- local
+"  you can space delimit your settings also
+
+let mapleader=','
+let maplocalleader='['
+set directory=$HOME/.vim/swap//
+set backupdir=$HOME/.vim/backups//
+
+" Make syntax highlighting work
+let python_highlight_all=1
+syntax on
 set nocompatible
+filetype off
 
-" Find the python binary from the environment
-function! WhichPython()
-    return system("/bin/which python")
-endfunction
+set rtp+=~/.vim/bundle/Vundle/
+"set rtp+=~/.vim/bunlde/powerline/bindings/vim
 
-" Set the RunTime Path for Vim
-if has('nvim')
-    " (NeoVim) Figure out which python to use via Env
-    let g:python_host_prog=WhichPython()
+call vundle#rc()
 
-    " (NeoVim) Set RTP accordingly
-    set rtp+=~/.config/nvim/.vim
-endif
-set rtp+=~/.vim/bundle/Vundle.vim
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+"" BUNDLES ------------------------
+" Making with the useful and pretty
+" Bundle 'https://github.com/Lokaltog/powerline.git'
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+Bundle 'git://github.com/sickill/vim-monokai.git'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'LogViewer'
+Plugin 'editorconfig/editorconfig-vim'
+
+" Better folding
+Plugin 'tmhedberg/SimpylFold'
+"Bundle 'dotfiles'
+
+" Dash App for Vim
+" Bundle 'rizzatti/funcoo.vim'
+" Bundle 'rizzatti/dash.vim'
+
+" tComment
+Bundle "tComment"
+
+" Programming
+Bundle "jQuery"
+Bundle "https://github.com/mattn/emmet-vim.git"
+Bundle "node"
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
 
 
-" ================ General Config ====================
-set number                      "    (nu) Enable Line numbers
-set backspace=indent,eol,start  "    (bs) Influences the working of <BS>,<Del>,<C>W,<C>U
-                                "         + indent | allow backspacing over autoindent
-                                "         + eol    | allow backspacing over line breaks (join lines)
-                                "         + start  | allow backspacing over the start of insert
-set numberwidth=1               "   (nuw) Min number of cols for line numbers
-set ruler                       "    (ru) Show Line, Col information
-set history=1000                "   (his) Keep a bunch of command history
-set showcmd                     "    (sc) Show incomplete commands at the bottom
-set noshowmode                  " (nosmd) Do not show the mode at the bottom
-set guicursor=a:blinkon0        "   (gcr) Disable Cursor Blink
-set noerrorbells                "  (noeb) Do not ring the bell for error messages
-set novisualbell                "  (novb) Do not flash the visual bell for error messages
-set hidden                      "   (hid) Buffers can exist in the bg without being a window
-let python_highlight_all=1      " ------- Full Python highlighting support
-syntax on                       "   (syn) Turn on syntax highlighting
-let mapleader=','               " ------- <leader> key
-let maplocalleader='['          " ------- <localleader> key
-set autoread                    "    (ar) Auto-read a file that changed outside of Vim
-set updatetime=500              "    (ut) Idle time (in ms) before the swapfile is written
+" Python Amazingness
+Bundle "https://github.com/davidhalter/jedi-vim.git"
+Plugin 'vim-scripts/indentpython.vim'
 
-" ======================= Theme =======================
+" Syntax Highlighting
+Bundle "Markdown"
 
-" Custom Highlighting
+" PHPdocumentor
+Bundle 'tobyS/pdv'
+
+" Git
+Bundle "vim-github-dashboard"
+Bundle "gitignore"
+
+" Stuff
+Bundle "Crunch"
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+"" END BUNDLES -------------------
+
+" 256-Color Support
+set t_Co=256
 highlight BadWhitespace ctermbg=red guibg=darkred
 
-" Terminal Settings
-set t_Co=256            " (number of colors) Support 256 color
+" Filetype-based indenting logic enabled; with smartindent
+filetype on
+filetype plugin indent on
+set smartindent
 
-" =============== Vundle Initialization ===============
-" This loads all the plugins specified in ~/.vim/vundles.vim
-" Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/.vim/vundles.vim"))
-  source ~/.vim/vundles.vim
+" Basic settings
+set nolist " Diable listchars (whitespace/newline/etc)
+set ignorecase
+set complete=.,w,b,t                    " ??????
+"set textwidth=80 " Max line length before wrapping
+set textwidth=0 " Max line length before wrapping
+set nocursorline
+set nocursorcolumn
+set printoptions=paper:letter
+set nobackup
+set nowritebackup
+set hidden
+set modeline
+set modelines=5
+set autoread
+set autowrite
+set history=256
+
+set nolazyredraw
+set hidden
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" Disable Mouse
+set mouse=a
+
+" Hide mouse after chars typed
+set mousehide
+
+set shortmess=aOtI
+set report=0
+set scrolloff=5
+
+"set guifont=Source\ Code\ Pro:h16
+set guifont=Source\ Code\ Pro\ for\ Powerline:h14
+
+" Regular Expression Fun
+
+"  ALWAYS make substitutions global
+" set gdefault
+
+" Lots of undo history!
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.vim/undo
 endif
 
-" =============== Relative Numbers ===============
-" `relativenumber` was introduced in Vim 7.3.
-" This provides compatibility for older versions of Vim
+
+" Theme
+" colorscheme oceandeep
+set background=dark
+" colorscheme solarized
+colorscheme monokai
+
+" Searching / Machines
+set showmatch                           " show matching brackets
+set smartcase                           " ?
+set mat=5                               " how many tenths of a second to blink matching brackets for
+set hlsearch                            " Highlight searches
+set incsearch                           " BUT do highlight as you type you search phrase
+
+" Line numbers in the gutter
+set number
+set numberwidth=1
 if exists("&norelativenumber")
+    " relativenumber was introduced in Vim 7.3 - this provides compatibility
+    " for older versions of Vim
     setlocal norelativenumber
 endif
+set ruler
 
-" ================ Turn Off Swap Files ==============
-set noswapfile    " (noswf)
-set nobackup      " (nobk)
-set nowritebackup " (nowb)
+" BOOP
+set noerrorbells
+set novisualbell
 
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-if has('persistent_undo') && !isdirectory(expand('~').'/.vim/backups')
-        silent !mkdir ~/.vim/backups > /dev/null 2>&1
-        set undodir=~/.vim/backups
-        set undofile
-endif
-
-" ================ Indentation ======================
-set cinwords=if,else,while,do,for,switch,case   " (cinw) The keywords that start
-                                                "        an extra indent in the
-                                                "        next line when
-                                                "        'smartindent' or 'cindent'
-                                                "        is set.
-set autoindent                          "   (ai) Copy indent from current line when
-                                        "        starting a new line
-set cindent                             "  (cin) Enable automatic C program indenting
-set cinoptions=:s,ps,ts,cs              " (cino) Affects the way `cin` reindents lines in
-                                        "        C program.
-set smartindent                         "   (si) Smart auto-indenting when starting a new line.
-set smarttab                            "  (sta) When on, a <Tab> in front of
-                                        "        a line insert blanks according to a
-                                        "        'shiftwidth'.  'tabstop' or 'softtabstop'
-                                        "        is used in other places.
-set shiftwidth=4                        "   (sw) Number of spaces to use for each step
-                                        "        of 'autoindent'. For: cindent and << / >>
-set tabstop=4                           "   (ts) How many columns a tab counts for
-set softtabstop=4                       "  (sts) How many columns Vim uses when pressing
-                                        "        TAB in insert mode
-set expandtab                           "   (et) Insert spaces when tabbing
-set textwidth=0                         "   (tw) Max line length before wrapping
-set nolist                              " (list) Don't show invisibles
-set list listchars=tab:\ \ ,trail:·     "  (lcs) Invisibles mapping
-set wrap                                " (wrap) Wrapping Enabled
-" set nowrap                            "        Wrapping Disabled
-set linebreak                           "  (lbr) Wrap lines at convenient pionts
-set whichwrap+=<,>,h,l                  "   (ww) Keys allowed to move to the previous
-                                        "        or next line when the cursor is on the
-                                        "        first/last character in the line
-set showbreak=">\ "                     "  (sbr) Suffix on wrapped line
-set breakat="\ |@"                      "  (brk) Choose which characters might cause a break
-                                        "        if 'linebreak' is on.
-
-" Toggle invisibles
-nmap <leader>l :set list!<CR>
-
-" Auto indent pasted text
-nnoremap p p=`]<C-o>
-nnoremap P P=`]<C-o>
-
-filetype plugin on
-filetype indent on
-
-" ================ Folds ============================
-set foldenable          "  (fen) Turn on folding
-set foldmethod=indent   "  (fdm) Make folding indent sensitive
-set foldopen-=search    "  (fdo) don't open folds when you search into them
-set foldopen-=undo      "  (fdo) don't open folds when you undo stuff
-set foldnestmax=3       "  (fdn) max nested folds
-
-" ================ Scrolling ========================
-set scrolloff=5         "   (so) Min number of screen lines to keep above and
-                        "        below the cursor
-set sidescrolloff=15    " (siso) Min number of screen columns to keep to the
-                        "        left and right of the cursor if 'nowrap' is
-                        "        set
-set sidescroll=1        "   (ss) Min number of columns to scroll horizontally
-                        "        Used with 'nowrap'
-
-" ================ Completion =======================
+" Status Line
 set wildmenu
-set wildmode=list:longest
-
-" WildMenu Ignores - Things to ignore when tab completing
-set wildignore=*.o,*.obj,*~
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-
-" ================ Search ===========================
-set showmatch       "   (sm) Show matching brakets in insert mode
-set smartcase       "  (scs) Override the 'ignorecase' option if the search
-                    "        pattern contains uppercase characters.
-
-set matchtime=5     "  (mat) How many tenths of a second to show the matching paren.
-set hlsearch        "  (hls) Highlight the current search
-set incsearch       "   (is) Show search result while typing
-set ignorecase
-
-
-" Other Stuff
-set complete=.,w,b,t                    " XXX: Fill in
-set printoptions=paper:letter           " XXX: Fill in
-set modeline                            "   (ml) Mode Line enabled?
-set modelines=5                         "  (mls) Number of lines check for set commands.
-set autowrite                           "   (aw) Write the contents of the file, if modified on
-                                        "        + :next / :rewind / :last / :first / :previous
-                                        "        + :stop / :suspend / :tag / :! / :make
-                                        "        + CTRL-] / CTRL-^
-set nolazyredraw                        "   (lz) Only typing updates the screen
-set mouse=a                             " ------ Mouse modes
-                                        "        + n = normal
-                                        "        + v = visual
-                                        "        + i = insert
-                                        "        + c = command
-                                        "        + h = all previous when editing a help file
-                                        "        + a = all previous modes
-                                        "        + r = for hit-enter and more-prompt
-set mousehide                           "   (mh) Hide the mouse after character are typed
-set shortmess=aOtI                      "  (shm) Helps avoid all the hit-enter prompts (see help)
-set report=0                            " ------ Threshold for reporting number of lines changed
-
+set wildmode=full
 set statusline=%F%m%r%h%w\ %y\ [\ A(%03.3b)\ .\:.\ H(%02.2B)\ .\:.\ L%04l\ -\ C%04v\ .\:.\ %p%%\ .\:.\ %L\ Length\ ]
 set laststatus=2                        " always show the status line
-set formatoptions=tcrqn                 " See Help (complex)
+
+" Text
+set formatoptions=tcrqn                            " See Help (complex)
+set autoindent                                  " autoindent
+set smartindent                                  " smartindent
+set cindent                             " do c-style indenting
+set cinoptions=:s,ps,ts,cs
+set cinwords=if,else,while,do,for,switch,case
+set tabstop=4                           " tab spacing (settings below are just to unify it)
+set softtabstop=4                       " unify
+set shiftwidth=4                        " unify
+set expandtab                           " tabs preferred over spaces
+set smarttab
+set wrap                              " do not wrap lines
+set linebreak
+set showbreak=">\ "
+
+" Folding
+set foldenable                          " Turn on folding
+set foldmethod=indent                   " Make folding indent sensitive
+set foldopen-=search                    " don't open folds when you search into them
+set foldopen-=undo                      " don't open folds when you undo stuff
 
 " Formatting
 "" Automatically insert the current comma leader after hitting 'o' or 'O' in normal
@@ -204,9 +204,82 @@ set formatoptions-=t
 set splitbelow
 set splitright
 set vb t_vb=
+set showcmd
+set laststatus=2
+set noshowmode
 
 " Default Encoding
 set encoding=utf-8
+
+" FuzzyFinder config
+let g:fuf_modesDisable = []
+nnoremap <silent> <LocalLeader>h :FufHelp<CR>
+nnoremap <silent> <LocalLeader>2  :FufFileWithCurrentBufferDir<CR>
+nnoremap <silent> <LocalLeader>@  :FufFile<CR>
+nnoremap <silent> <LocalLeader>3  :FufBuffer<CR>
+nnoremap <silent> <LocalLeader>4  :FufDirWithCurrentBufferDir<CR>
+nnoremap <silent> <LocalLeader>$  :FufDir<CR>
+nnoremap <silent> <LocalLeader>5  :FufChangeList<CR>
+nnoremap <silent> <LocalLeader>6  :FufMruFile<CR>
+nnoremap <silent> <LocalLeader>7  :FufLine<CR>
+nnoremap <silent> <LocalLeader>8  :FufBookmark<CR>
+nnoremap <silent> <LocalLeader>*  :FuzzyFinderAddBookmark<CR><CR>
+nnoremap <silent> <LocalLeader>9  :FufTaggedFile<CR>
+
+" PHPdocumentor Setup
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+
+" Python Jedi for Vim
+" (?) Automatically Init with Vim? (default=1)
+let g:jedi#auto_initialization = 1
+
+" (?) Automatically init Vim config? (default=1)
+let g:jedi#auto_vim_configuration = 1
+
+" (?) Make Jedi-Vim use tabs when going to defs? (default=1)
+let g:jedi#use_tabs_not_buffers = 1
+
+" (?) If you like to use splits... (left, right, top, bottom, winwidth)
+" let g:jedi#use_splits_not_buffers = "left"
+
+" (?) Jedi automatically starts completion if you type something. (default=1)
+let g:jedi#popup_on_dot = 1
+
+" (?) Auto-select the first thing in the menu? (default=1)
+let g:jedi#popup_select_first = 1
+
+" (?) Show func signature when in insert mode (in real-time)
+"   > 1 = Pop Up in Buffer (default)
+"   > 2 = In Vim CmdLine
+let g:jedi#show_call_signatures = 1
+
+" Jedi Key Bindings
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+
+" SimpylFold
+" ===================================
+" Show docstrings for folded code?
+let g:SimpylFold_docstring_preview=1
+
+
+" Syntastic (Syntax Checking for Vim)
+" ====================================
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_python_flake8_args='--select=E901,E902,F821,F822,F823,F831'
 
 " AutoCmds
 " ==========================
@@ -218,7 +291,7 @@ set encoding=utf-8
 "  sw = shiftwidth
 "  fo = formatoptions
 "  et = expandtab
-" sta = showtabline
+" sta = stowtabline
 " sts = softtabstop
 
 if has("autocmd")
@@ -228,22 +301,14 @@ if has("autocmd")
         " au BufWritePre * :mark `|:%s/\s\+$//e|normal ``      " kill trailing whitespace at the end of lines before writing.
         au BufWritePre * :%s/\s\+$//e
         au BufReadPre,FileReadPre *.pp set ft=puppet
-
-        " What to do if you just type 'vim'
         autocmd vimenter * if !argc() | NERDTree | endif
     augroup END
     augroup Python
         au!
         " au FileType python :set ai sw=4 ts=4 sta et fo=croql fdm=indent foldlevel=99
-        au BufRead,BufNewFile *.py :match BadWhitespace /\t/
-        au BufRead,BufNewFile python
-            \ set tabstop=4
-            \ set softtabstop=4
-            \ set shiftwidth=4
-            \ set textwidth=79
-            \ set expandtab
-            \ set autoindent
-            \ set fileformat=unix
+        au BufRead,BufNewFile *.py,*.pyw,*.c,*.h :match BadWhitespace /\s\+$/
+        au BufRead,BufNewFile *.py,*.pyw,*.c,*.h :match BadWhitespace /\t/
+        au BufNewFile,BufRead *.py :set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
         " au BufWritePre *.py :retab
     augroup END
     augroup FullStack
@@ -308,26 +373,8 @@ endif
 " nnoremap <C-L> <C-W><C-L>
 " nnoremap <C-H> <C-W><C-H>
 
-command! -range=% -nargs=0 Tab2Space execute "<line1>,<line2>s/^\\t\\+/\\=substitute(submatch(0), '\\t', repeat(' ', ".&ts."), 'g')"
-command! -range=% -nargs=0 Space2Tab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
-
-let g:word_count="<unknown>"
-fun! WordCount()
-    return g:word_count
-endfun
-
-fun! UpdateWordCount()
-    let s = system("wc -w ".expand("%p"))
-    let parts = split(s, ' ')
-    if len(parts) > 1
-        let g:word_count = parts[0]
-    endif
-endfun
-
-augroup WordCounter
-    au! CursorHold * call UpdateWordCount()
-    au! CursorHoldI * call UpdateWordCount()
-augroup END
+" Enable folding with the spacebar
+nnoremap <space> za
 
 " Abbrs
 iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
@@ -346,15 +393,59 @@ cabbrev Perl perl
 cabbrev pelr perl
 cabbrev peerl perl
 
+" like :wq except write and suspend
+""command Wst w <bar> st
+""cabbrev wst Wst
+
+" NERDTree
+map <S-t> :NERDTreeToggle<CR>
+let g:ctrlp_map = '<c-t>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" this puts our search term in the middle of the screen
+nmap n nmzz.`z
+nmap N Nmzz.`z
+nmap * *mzz.`z
+nmap # #mzz.`z
+nmap g* g*mzz.`z
+nmap g# g#mzz.`z
+
+" Fixing Keys
+" -- Real tabs!
+noremap <tab> <nop>
+
+" -- No arrows
+noremap <left> <nop>
+noremap <right> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+
+" -- remap parentheses operator to p
+onoremap p i(
+
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? /\v
+vnoremap ? /\v
+
+nnoremap <leader><space> :noh!<cr>
+
 " Make the tab key dual purpose.
 function! InsertTabWrapper()
+    " Where is the cursor on the current line?
     let col = col(".") - 1
+
+    " 0 is BOL; use tab // Get the character before the... yeah.  BOOM
     if !col || getline(".")[col - 1] !~ '\k'
         return "\<tab>"
     else
         return "\<c-n>"
     endif
 endfunction
+
+" Map the function to tab
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-p>
 
 " Toggle between numbers and relative numbers
 function! NumberToggle()
@@ -365,35 +456,35 @@ function! NumberToggle()
     endif
 endfunc
 
-function! CurrentDirectory()
-    let curdir = substitute(getcwd(), $HOME, "~", "")
-    return curdir
-endfunction
+if v:version < 704
+    nnoremap <silent> <leader>n :call NumberToggle()<cr>
+else
+    set relativenumber
+    set number
+endif
 
-function! WhichPyEnv()
-    return system("/bin/which pyenv")
-endfunction
-
-function! HasPaste()
-    if &paste
-        return '[PASTE]'
-    else
-        return ''
-    endif
-endfunction
-
+" toggle paste/nopaste modes
+nnoremap <silent> <Leader>p :set paste! paste?<CR>
 
 " Special Python Stuff
-if !has('nvim')
 py << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
 EOF
-endif
 
-" ================ Custom Settings ========================
-source ~/.vim/settings.vim
+"
+" POWERLINE
+"
+
+" Conditionally include Powerline for Vim if the files actually exist.
+" let g:powerline_python_vim = '/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim/plugin/powerline.vim'
+let g:powerline_python_vim = '/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim'
+
+if filereadable(powerline_python_vim)
+    python import powerline.bindings.vim
+    exec ":source " . g:powerline_python_vim
+endif
