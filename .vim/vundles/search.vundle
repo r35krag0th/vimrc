@@ -1,6 +1,6 @@
 " vim: ft=vim
 
-Plugin 'justinmk/vim-sneak'
+" Plugin 'justinmk/vim-sneak'
 Plugin 'rking/ag.vim'
 Plugin 'vim-scripts/IndexedSearch'
 Plugin 'nelstrom/vim-visual-star-search'

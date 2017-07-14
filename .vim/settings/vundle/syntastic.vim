@@ -25,3 +25,5 @@ endfunction
 if !exists("g:syntastic_ruby_exec")
     let g:syntastic_ruby_exec = s:FindRubyExec()
 endif
+
+let g:syntastic_python_flake8_post_args='--ignore=E501'

@@ -8,5 +8,6 @@ Plugin 'scrooloose/syntastic.git'
 Plugin 'nelstrom/vim-markdown-preview'
 Plugin 'skwp/vim-html-escape'
 Plugin 'mxw/vim-jsx'
+Plugin 'solarnz/nagios.vim'
 
 " echo "(~/.vim/vundles/languages.vundle) Loaded..."
