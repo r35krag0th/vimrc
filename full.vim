@@ -82,6 +82,7 @@ Bundle 'https://github.com/scrooloose/nerdtree.git'
 set t_Co=256
 highlight BadWhitespace ctermbg=red guibg=darkred
 
+<<<<<<< HEAD
 " Filetype-based indenting logic enabled; with smartindent
 filetype on
 filetype plugin indent on
@@ -132,7 +133,65 @@ set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 if has('persistent_undo')
     set undofile
     set undodir=~/.vim/undo
-endif
+
+" Find the python binary from the environment
+function! WhichPython()
+    " Essentially
+    " ==============================================
+    " If PyEnv is installed use `pyenv which python`
+    " Otherwise use `which python`
+    return system('([ ! -z "$(which pyenv)" ] && pyenv which python) || which python')
+endfunction
+
+" Set the RunTime Path for Vim
+if has('nvim')
+    " (NeoVim) Figure out which python to use via Env
+    let g:python_host_prog=WhichPython()
+
+    " (NeoVim) Set RTP accordingly
+    set rtp+=~/.config/nvim/.vim
+
+    "dein Scripts-----------------------------
+    if &compatible
+        set nocompatible               " Be iMproved
+    endif
+
+    " Required:
+    set runtimepath+=/home/ubuntu/.vim/dein/repos/github.com/Shougo/dein.vim
+
+    " Required:
+    if dein#load_state('/home/ubuntu/.vim/dein')
+        call dein#begin('/home/ubuntu/.vim/dein')
+
+        " Let dein manage dein
+        " Required:
+        call dein#add('/home/ubuntu/.vim/dein/repos/github.com/Shougo/dein.vim')
+
+        " Add or remove your plugins here:
+        call dein#add('Shougo/neosnippet.vim')
+        call dein#add('Shougo/neosnippet-snippets')
+        call dein#add('Shougo/deoplete.nvim')
+        call dein#add('zchee/deoplete-jedi')
+        call dein#add('Valloric/YouCompleteMe')
+
+        " You can specify revision/branch/tag.
+        call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+        " Required:
+        call dein#end()
+        call dein#save_state()
+    endif
+
+    " Required:
+    filetype plugin indent on
+    syntax enable
+
+    " If you want to install not installed plugins on startup.
+    if dein#check_install()
+     call dein#install()
+    endif
+
+    "End dein Scripts-------------------------
 
 
 " Theme
@@ -294,37 +353,118 @@ let g:SimpylFold_docstring_preview=1
 " sta = stowtabline
 " sts = softtabstop
 
+" Common Code Styles and Practices
+function SetupCommonCodeStyle()
+    set fileformat=unix
+    set textwidth=181
+endfunction
+
+" Two-Space Indentation; js/json/html/css/ruby
+function SetupTwoSpaceIndentation()
+    set tabstop=2
+    set softtabstop=2
+    set shiftwidth=2
+    call SetupCommonCodeStyle()
+endfunction
+
+" Four-Space Indentation; preferred default
+function SetupFourSpaceIndentation()
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
+    set expandtab
+    set autoindent
+    call SetupCommonCodeStyle()
+endfunction
+
+" Language: Ruby
+function SetupRubyCodeStyle()
+    " Include the common Code Style stuffs
+    call SetupTwoSpaceIndentation()
+
+endfunction
+
+" Language: CoffeeScript
+function SetupCoffeeScriptCodeStyle()
+    " Include the common Code Style stuffs
+    call SetupTwoSpaceIndentation()
+
+    setlocal filetype=coffeescript
+endfunction
+
+" Language: Python
+function SetupPythonCodeStyle()
+    " Include the common Code Style stuffs
+    call SetupFourSpaceIndentation()
+
+    match BadWhitespace /\t/
+endfunction
+
+" Language: JavaScript
+function SetupJavascriptCodeStyle()
+    call SetupTwoSpaceIndentation()
+
+endfunction
+
+" Language: JSON
+function SetupJsonCodeStyle()
+    call SetupTwoSpaceIndentation()
+    set showtabline
+
+    " FormatOptions
+    " ============================================================================
+    " c = Auto-wrap comments using TextWidth, inserting the current comment
+    "     leader automatically
+    " r = Automatically insert the current comment leader after hitting
+    "     <Enter> in Insert Mode
+    " o = Automatically insert the current comment leader after hitting o/O in
+    "     Normal mode
+    " q = Allow formatting of comments with 'gq'
+    " l = Long lines are not broken in insert mode (longer than TextWidth)
+    set formatoptions=croql
+endfunction
+
+" Language: Makefile
+function SetupMakefileCodeStyle()
+    call SetupFourSpaceIndentation()
+
+    set fdm=indent
+    set noexpandtab
+endfunction
+
 if has("autocmd")
     augroup Standard
         au!
         au BufEnter * :syntax sync fromstart  " ensure every file does syntax highlighting (full)
         " au BufWritePre * :mark `|:%s/\s\+$//e|normal ``      " kill trailing whitespace at the end of lines before writing.
         au BufWritePre * :%s/\s\+$//e
-        au BufReadPre,FileReadPre *.pp set ft=puppet
+        au BufReadPre,FileReadPre *.ini set ft=cfg " You can also use 'inifile' here, as well
+
+        " What to do if you just type 'vim'
         autocmd vimenter * if !argc() | NERDTree | endif
+    augroup END
+    augroup CoffeeScript
+        au!
+        au BufReadPre,FileReadPre *.coffee call SetupCoffeeScriptCodeStyle()
     augroup END
     augroup Python
         au!
         " au FileType python :set ai sw=4 ts=4 sta et fo=croql fdm=indent foldlevel=99
-        au BufRead,BufNewFile *.py,*.pyw,*.c,*.h :match BadWhitespace /\s\+$/
-        au BufRead,BufNewFile *.py,*.pyw,*.c,*.h :match BadWhitespace /\t/
-        au BufNewFile,BufRead *.py :set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+        au BufRead,BufNewFile *.py call SetupPythonCodeStyle()
+        au BufRead,BufNewFile python call SetupPythonCodeStyle()
         " au BufWritePre *.py :retab
     augroup END
     augroup FullStack
-        au BufNewFile,BufRead *.js, *.html, *.css
-            \ set tabstop=2
-            \ set softtabstop=2
-            \ set shiftwidth=2
+        au BufNewFile,BufRead *.js, *.html, *.css call SetupTwoSpaceIndentation()
     augroup END
     augroup JSON
         au!
-        au BufEnter *.json :set sw=2 ts=2 sts=2 sta et fo=croql
+        au BufEnter,BufNewFile,BufRead *.json call SetupJsonCodeStyle()
     augroup END
     augroup makefile
         au!
-        au BufNewFile,BufRead Makefile :set fdm=indent
-        au BufEnter Makefile set noexpandtab
+        au BufNewFile,BufRead Makefile call SetupMakefileCodeStyle()
+        au BufEnter,BufNewFile,BufRead Makefile call SetupMakefileCodeStyle()
     augroup END
 
     augroup gzip
@@ -358,12 +498,12 @@ if has("autocmd")
     augroup END
     augroup extra_extensions
         au!
-        au BufEnter *.pp set ft=puppet
-        au BufEnter named.conf.local set ft=named
-        au BufEnter named.conf.options set ft=named
-        au BufEnter named.conf set ft=named
-        au BufEnter *.zone set ft=bindzone
-        au BufEnter /etc/icinga2/conf.d/* set ft=icinga
+        au BufReadPre,FileReadPre *.pp set ft=puppet
+        au BufEnter,BufNewFile,BufRead named.conf.local set ft=named
+        au BufEnter,BufNewFile,BufRead named.conf.options set ft=named
+        au BufEnter,BufNewFile,BufRead named.conf set ft=named
+        au BufEnter,BufNewFile,BufRead *.zone set ft=bindzone
+        au BufEnter,BufNewFile,BufRead /etc/icinga2/conf.d/* set ft=icinga
     augroup END
 endif
 
